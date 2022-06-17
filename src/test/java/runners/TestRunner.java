@@ -8,7 +8,11 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/functionalTests/End2End_Test.feature",
-        glue = {"stepDefinitions"}
+        glue = {"stepDefinitions"},
+        plugin = {"pretty", "json:target/cucumber-reports/Cucumber.json",
+                "junit:target/cucumber-reports/Cucumber.xml",
+                "html:target/cucumber-reports/Cucumber.html"},
+        monochrome = true
 )
 public class TestRunner {
 }
