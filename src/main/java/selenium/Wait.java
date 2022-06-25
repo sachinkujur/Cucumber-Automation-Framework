@@ -32,7 +32,7 @@ public class Wait {
     public static void untilPageLoadComplete(WebDriver driver, Long timeoutInSeconds) {
         until(driver, (d) ->
         {
-            Boolean isPageLoaded = (Boolean) ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
+            Boolean isPageLoaded = ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete");
             if (!isPageLoaded) System.out.println("Document is loading");
             return isPageLoaded;
         }, timeoutInSeconds);
@@ -44,7 +44,7 @@ public class Wait {
 
 
     private static void until(WebDriver driver, Function<WebDriver, Boolean> waitCondition, Long timeoutInSeconds) {
-        WebDriverWait webDriverWait = new WebDriverWait(driver, timeoutInSeconds);
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
         webDriverWait.withTimeout(Duration.ofSeconds(timeoutInSeconds));
         try {
             webDriverWait.until(waitCondition);
